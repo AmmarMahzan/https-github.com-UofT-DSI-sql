@@ -45,8 +45,41 @@ There are several tools online you can use, I'd recommend [Draw.io](https://www.
 
 **HINT:** You do not need to create any data for this prompt. This is a conceptual model only. 
 
+ANSWER:
+For this prompt, I designed an Entity-Relationship Diagram (ERD) that includes the following entities:
+	•	Employee
+	•	Customer
+	•	Orders
+	•	Sales
+	•	Books
+	•	OrderDetails
+	•	Date
+
+Each table includes essential attributes and primary/foreign keys to establish relationships:
+	•	Books to Orders: Many-to-Many
+	•	Customer to Orders: One-to-Many
+	•	Employees to Orders: One-to-Many
+	•	Sales to Orders: One-to-Many
+	•	Date to Orders: One-to-Many
+
+📎 See ERD: Prompt#1.png
+
+
 #### Prompt 2
 We want to create employee shifts, splitting up the day into morning and evening. Add this to the ERD.
+
+ANSWER:
+To model employee shifts, I added a new table called Shifts, which includes:
+	•	ShiftID (Primary Key)
+	•	EmployeeID (Foreign Key)
+	•	DateID (Foreign Key)
+	•	ShiftType (Morning or Evening)
+	•	StartTime, EndTime
+
+This links to both the Employee and Date tables, showing when and which shift was assigned.
+
+📎 See updated ERD with Shifts: Prompt#2.png
+
 
 #### Prompt 3
 The store wants to keep customer addresses. Propose two architectures for the CUSTOMER_ADDRESS table, one that will retain changes, and another that will overwrite. Which is type 1, which is type 2? 
@@ -54,7 +87,21 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Type 1 – Overwrites Old Address
+	•	This model keeps only the most recent address by updating the same row.
+	•	Pros: Simple, minimal storage
+	•	Cons: Historical address info is lost
+
+📎 See ERD: Prompt#3.Type1.png
+
+Type 2 – Retains Address History
+	•	This model retains old addresses and uses an EffectiveDate (and optionally EndDate or IsActive) to track changes over time.
+	•	Pros: Keeps history, useful for analytics
+	•	Cons: Slightly more complex to manage
+
+📎 See ERD: Prompt3-Type2.png
+
+
 ```
 
 ***
